@@ -1,0 +1,608 @@
+.bnote_note {
+	position:absolute;
+	left:100px;
+	top:100px;
+	width:200px;
+	height:200px;
+	opacity:1;
+	color:#666;
+	background:transparent;
+	font-family:helvetica,arial,sans serif;
+	font-size:12px;
+	font-weight:normal;
+	text-decoration:none;
+	text-align:left;
+	-webkit-transform: scale(1);
+	-webkit-transform-origin: right 10px;
+	-webkit-transition-property: -webkit-transform, width, height;
+	-webkit-transition-duration: 0, 0, 0;
+	-webkit-transition-timing: ease-out;
+	-webkit-perspective: 1000px;
+	-moz-transform: scale(1);
+	-moz-transform-origin: right 10px;
+	-moz-transition-property: -moz-transform, width, height;
+	-moz-transition-duration: 0, 0, 0;
+	-moz-transition-timing: ease-out;
+	-moz-perspective: 10000px;
+}
+.bnote_note.bnote_note_moving {
+	-webkit-transition-property: left, top;
+	-webkit-transition-duration: 300ms, 300ms;
+	-moz-transition-property: left, top;
+	-moz-transition-duration: 300ms, 300ms;
+
+}
+.bnote_note.bnote_note_resizing {
+	-webkit-transition-property: width, height;
+	-webkit-transition-duration: 300ms, 300ms;
+	-moz-transition-property: width, height;
+	-moz-transition-duration: 300ms, 300ms;
+
+}
+.bnote_note_inner {
+	position:relative;
+	z-index:2;
+	height:100%;
+	border: 1px solid #f8fdce;
+	border-color: #f8fdce #c7af73 #c7af73 #f8fdce;
+	background-color:#F3E596;
+	background-image:-webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+			from(#ECE0AF),
+			color-stop(0.3, #FAF4B9),
+			to(#EBD16A)
+		);
+	overflow:hidden;
+	-webkit-transition-property: -webkit-transform, -webkit-box-shadow;
+	-webkit-transition-duration: 500ms;
+	-moz-transition-property: -moz-transform, -moz-box-shadow;
+	-moz-transition-duration: 500ms;
+	-ms-transition-property: -ms-transform;
+	-ms-transition-duration: 500ms;
+	transition-property: transform;
+	transition-duration: 500ms;
+	
+	-webkit-transform-origin: 50% 50% 0;
+	-webkit-transform: rotateY(0deg);
+	-webkit-backface-visibility:hidden;
+	-moz-transform-origin: 50% 50% 0;
+	-moz-transform: rotateY(0deg);
+	-moz-backface-visibility:hidden;
+	-ms-transform-origin: 50% 50% 0;
+	-ms-transform: rotateY(0deg);
+	-ms-backface-visibility:hidden;
+	transform-origin: 50% 50% 0;
+	transform: rotateY(0deg);
+	backface-visibility:hidden;
+	
+	-webkit-box-shadow: rgba(0,0,0,0.3) 0px 3px 5px;
+	-moz-box-shadow: rgba(0,0,0,0.3) 0px 3px 5px;
+	-ms-box-shadow: rgba(0,0,0,0.3) 0px 3px 5px;
+	box-shadow: rgba(0,0,0,0.3) 0px 3px 5px;
+}
+.bnote_note_appear .bnote_note_inner {
+	-webkit-transform:scale(0.1);
+	-moz-transform:scale(0.1);
+}
+.bnote_note_stretch .bnote_note_inner {
+	-webkit-transform:scale(1.1);
+	-moz-transform:scale(1.1);
+}
+.bnote_note_flipped .bnote_note_inner {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+.bnote_note_handle {
+	height:15px;
+	margin:3px;
+	padding:5px;
+	color:#fff;
+	letter-spacing:-1px;
+	cursor:move;
+	background-color:transparent;
+	-webkit-transition: background-color 300ms;
+	-moz-transition: background-color 300ms;
+	transition: background-color 300ms;
+	border-radius:5px;
+}
+.bnote_note_handle:hover {
+	background-color:rgba(255,255,255,0.5);
+}
+.bnote_note_handle h3 {
+	margin:0;
+	color:#fff;
+}
+.bnote_note_track {
+	overflow:hidden;
+}
+.bnote_note_scribble {
+	padding:16px 16px 16px 8px;
+}
+.bnote_note_scribble h3 {
+	display:inline;
+	margin:0 5px 0 0;
+	color:#000;
+	font-size:1em;
+}
+.bnote_note_scribble small {
+	display:none;
+}
+.bnote_note_txt {
+	text-align:left !important;
+	padding-right:7px;
+}
+.bnote_note_scribble:nth-child(even) {
+	background:rgba(0,0,0,0.07);
+	-webkit-border-image:url(../img/border.png) 6 0 6 0 round round;
+	-webkit-background-clip:padding-box;
+	
+	-moz-border-image:url(../img/border.png) 6 0 6 0 round round;
+	-moz-background-clip:padding;
+	
+	border-image:url(../img/border.png) 6 0 6 0 round round;
+	background-clip:padding-box;
+	border-width:6px 0;
+}
+.bnote_note_status {
+	position:absolute;
+	top:8px;
+	right:8px;
+	z-index:2;
+	color:#000;
+	font-size:14px;
+}
+.bnote_note_shadow {
+	position:absolute;
+	top:20px;
+	bottom:0;
+	z-index:0;
+	background:transparent;
+	-webkit-box-shadow: rgba(0,0,0,0.8) 0px 7px 30px;
+	-webkit-transition: opacity 300ms;
+
+	-moz-box-shadow: rgba(0,0,0,0.8) 0px 7px 30px;
+	-moz-transition: opacity 300ms; /* stops the shadows showing through the semi-opaque note when the note fades back in after drag/move */
+
+	box-shadow: rgba(0,0,0,0.8) 0px 7px 30px;
+	transition: opacity 300ms;
+}
+.bnote_note_shadow1 {
+	left:0;
+	right:50%;
+	-moz-border-radius-bottomright: 300px 60px ;
+	-moz-border-radius-topleft: 80px 400px ;
+	border-bottom-right-radius: 300px 60px ;
+	border-top-left-radius: 80px 400px ;
+}
+.bnote_note_shadow2 {
+	left:50%;
+	right:0;
+	-moz-border-radius-bottomleft: 300px 60px ;
+	-moz-border-radius-topright: 80px 400px ;
+	border-bottom-left-radius: 300px 60px ;
+	border-top-right-radius: 80px 400px ;
+}
+
+/* my note */
+
+.bnote_note_mine .bnote_note_inner {
+	border-color: #D7E3FA #8FBBCA #8FBBCA #D7E3FA;
+	background-color:#BFDBEA;
+	background-image:-webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+			from(#BFDBEA),
+			color-stop(0.3, #C6E1F5),
+			to(#8BC9E6)
+		);
+}
+
+/* buttons */
+
+.bnote_but_delete,
+.bnote_but_add,
+.bnote_but_back {
+	display:block;
+	float:left;
+	width:16px;
+	height:16px;
+	margin:0 3px 0 1px;
+	background:#000;
+	background-image:url(../img/sprites1.png);
+	background-repeat:no-repeat;
+	cursor:pointer;
+	text-indent:-3000px;
+	overflow:hidden;
+	border-radius:8px;
+	opacity:0.5;
+	-webkit-transition: opacity 300ms;
+	-moz-transition: opacity 300ms;
+	transition: opacity 300ms;
+}
+.bnote_but_delete:hover,
+.bnote_but_add:hover,
+.bnote_but_back:hover {
+	opacity:1;
+}
+.bnote_but_delete {
+	background-position: 4px -246px;
+}
+.bnote_but_add {
+	background-position: 4px -266px;
+}
+.bnote_but_back {
+	background-position: 4px -306px;
+}
+span.bnote_but_delete,
+span.bnote_but_delete:hover,
+span.bnote_but_add,
+span.bnote_but_add:hover,
+span.bnote_but_back,
+span.bnote_but_back:hover {
+	opacity:0.2;
+	cursor:default;
+}
+.bnote_but_submit {
+	display:block;
+	float:left;
+	height:16px;
+	margin: 0 0 5px 5px;
+	padding:3px 10px 0 10px;
+	color:#fff;
+	background: #aebcbf; /* old browsers */
+	background: -moz-linear-gradient(top, #aebcbf 0%, #6e7774 50%, #0a0e0a 51%, #0a0809 100%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aebcbf), color-stop(50%,#6e7774), color-stop(51%,#0a0e0a), color-stop(100%,#0a0809)); /* webkit */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aebcbf', endColorstr='#0a0809',GradientType=0 ); /* ie */
+	border:1px solid #fff;
+	border-radius:5px;
+	font-weight:bold;
+	cursor:pointer;
+	-webkit-box-shadow:1px 1px 3px rgba(0,0,0,0.5);
+}
+.bnote_but_submit:hover {
+	background-color:#697DD9;
+}
+
+
+
+/* hover position */
+.bnote_note:hover {
+	z-index:9999999 !important;
+}
+.bnote_note_inner:hover {
+	-webkit-box-shadow: rgba(0,0,0,0.8) 0px 3px 35px;
+	-moz-box-shadow: rgba(0,0,0,0.3) 0px 3px 35px;
+}
+
+/* resize */
+
+.bnote_note_resize_handle {
+	position:absolute;
+	right:2px;
+	bottom:1px;
+	width:16px;
+	height:16px;
+	cursor:se-resize;
+	font-size:16px;
+	line-height:16px;
+	font-family:sans-serif;
+	font-weight:bold;
+	background:url(../img/sprites1.png) no-repeat 100% -50px;
+}
+
+/* delete */
+
+.bnote_note_poof1 .bnote_note_inner,
+.bnote_note_poof2 .bnote_note_inner,
+.bnote_note_poof1 .bnote_note_shadow,
+.bnote_note_poof2 .bnote_note_shadow {
+	display:none;
+}
+.bnote_note_poof1 {
+	width:50px !important;
+	height:50px !important;
+	background:url(../img/sprites1.png) no-repeat 0 -150px;
+	overflow:hidden;
+}
+.bnote_note_poof2 {
+	width:50px !important;
+	height:50px !important;
+	background:url(../img/sprites1.png) no-repeat 0 -200px;
+	overflow:hidden;
+}
+
+/* reply */
+
+.bnote_note_textbox {
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:1;
+	width:100%;
+	height:100%;
+	border: 1px solid #f8fdce;
+	border-color: #999 #000 #000 #999;
+	background-color:#333;
+	background-image:-webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+			from(#000),
+			to(#666)
+		);
+	overflow:hidden;
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 500ms;
+	-moz-transition-property: -moz-transform;
+	-moz-transition-duration: 500ms;
+	-ms-transition-property: -ms-transform;
+	-ms-transition-duration: 500ms;
+	transition-property: transform;
+	transition-duration: 500ms;
+	
+	-webkit-transform-origin: 50% 50% 0;
+	-webkit-transform: rotateY(-180deg);
+	-webkit-backface-visibility: hidden;
+	-moz-transform-origin: 50% 50% 0;
+	-moz-transform: rotateY(-180deg);
+	-moz-backface-visibility: hidden;
+	-ms-transform-origin: 50% 50% 0;
+	-ms-transform: rotateY(-180deg);
+	-ms-backface-visibility: hidden;
+	transform-origin: 50% 50% 0;
+	transform: rotateY(-180deg);
+	backface-visibility: hidden;
+	
+	-webkit-box-shadow: rgba(0,0,0,0.3) 0px 3px 5px;
+	-moz-box-shadow: rgba(0,0,0,0.3) 0px 3px 5px;
+	-ms-box-shadow: rgba(0,0,0,0.3) 0px 3px 5px;
+	box-shadow: rgba(0,0,0,0.3) 0px 3px 5px;
+}
+.bnote_note_flipped .bnote_note_textbox {
+	-webkit-transform: rotateY(0deg) rotate(0deg);
+	-moz-transform: rotateY(0deg) rotate(0deg);
+	-ms-transform: rotateY(0deg) rotate(0deg);
+	transform: rotateY(0deg) rotate(0deg);
+}
+.bnote_note_textbox .bnote_note_handle {
+	background:#333;
+}
+.bnote_note_textbox textarea {
+	display:block;
+	background:#fff;
+	margin:5px;
+	border:1px inset #F7F9DA;
+}
+
+/* minimising */
+
+.bnote_note_minimising_stage1 {
+	-webkit-transition-duration:0, 300ms, 500ms, 500ms;
+	-moz-transition-duration:0, 300ms, 500ms, 500ms;
+	transition-duration:0, 300ms, 500ms, 500ms;
+}
+.bnote_note_minimising_stage1 .bnote_note_handle a,
+.bnote_note_minimising_stage1 .bnote_note_scribble,
+.bnote_note_minimising_stage1 .bnote_note_meta,
+.bnote_note_minimising_stage1 .bnote_note_handle,
+.bnote_note_minimising_stage1 .bnote_note_resize_handle,
+.bnote_note_minimising_stage1 .bnote_note_shadow,
+.bnote_note_minimising_stage1 .bnote_note_status,
+.bnote_note_minimising_stage1 .bnote_note_textbox,
+
+.bnote_note_minimising_stage2 .bnote_note_handle a,
+.bnote_note_minimising_stage2 .bnote_note_scribble,
+.bnote_note_minimising_stage2 .bnote_note_meta,
+.bnote_note_minimising_stage2 .bnote_note_handle,
+.bnote_note_minimising_stage2 .bnote_note_resize_handle,
+.bnote_note_minimising_stage2 .bnote_note_shadow,
+.bnote_note_minimising_stage2 .bnote_note_status,
+.bnote_note_minimising_stage2 .bnote_note_textbox,
+
+.bnote_note_minimised .bnote_note_handle a,
+.bnote_note_minimised .bnote_note_scribble,
+.bnote_note_minimised .bnote_note_meta,
+.bnote_note_minimised .bnote_note_resize_handle,
+.bnote_note_minimised .bnote_note_shadow  {
+	display:none !important;
+}
+.bnote_note_minimising_stage2 {
+	-webkit-transition-duration:0, 300ms, 500ms, 500ms;
+	-moz-transition-duration:0, 300ms, 500ms, 500ms;
+	transition-duration:0, 300ms, 500ms, 500ms;
+	width:20px !important;
+	height:20px !important;
+}
+
+/* minimised */
+
+.bnote_note_minimised {
+	width:20px !important;
+	height:20px !important;
+}
+.bnote_note_minimised .bnote_note_inner {
+}
+.bnote_note_minimised .bnote_note_handle {
+	height:5px;
+}
+
+.bnote_note_minimised .bnote_note_status {
+	top:0;
+	right:0;
+	left:0;
+	text-align:center;
+}
+
+/* locks */
+
+.bnote_note_locked .bnote_note_user1,
+.bnote_note_locked .bnote_note_user2 {
+	background-image:none;
+	opacity:0.5;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+}
+.bnote_note_locked .bnote_note_handle a,
+.bnote_note_locked .bnote_note_scribble,
+.bnote_note_locked .bnote_note_meta,
+.bnote_note_locked .bnote_note_status,
+.bnote_note_locked .bnote_note_resize_handle,
+.bnote_note_locked .bnote_note_shadow,
+.bnote_note_locked .bnote_note_textbox,
+.bnote_note_locked .bnote_note_scroll_bar {
+	display:none !important;
+}
+
+
+/* SCROLLBAR */
+
+.bnote_note_scroll_bar {
+	position:absolute;
+	right:4px;
+	top:32px;
+	bottom:14px;
+	width:6px;
+	border-radius: 3px;
+	background:rgba(0,0,0,0.1);
+	opacity:0.5;
+	-webkit-transition:opacity 500ms;
+}
+.bnote_note_scroll_bar:hover {
+	opacity:1;
+}
+.bnote_note_scroll_bar.off,
+.bnote_note_scroll_bar.off:hover {
+	opacity:0;
+}
+.bnote_note_scroll_handle_hit {
+	position:absolute;
+	top:0;
+	left:0;
+	width:18px;
+	height:15px;
+	margin-left:-6px;
+	cursor:s-resize;
+}
+.bnote_note_scroll_handle {
+	width:6px;
+	height:100%;
+	margin-left:6px;
+	border-radius: 3px;
+	background:#000;
+	opacity:0.3;
+	-webkit-transition:opacity 500ms;
+}
+.bnote_note_scroll_handle_hit:hover .bnote_note_scroll_handle {
+	opacity:0.6;
+}
+
+/* TOOL BAR */
+
+#bnote_tools {
+	position:fixed;
+	left:0;
+	top:-50px;
+	right:0;
+	height:0;
+	-webkit-transition: height, 200ms;
+	-moz-transition: height, 200ms;
+}
+#bnote_tools:hover {
+	top:0;
+}
+#bnote_tools_tab {
+	position:absolute;
+	left:46px;
+	bottom:-65px;
+	width:40px;
+	height:15px;
+	z-index:2;
+	background:#EBD16A;
+	-moz-border-radius-bottomleft: 5px ;
+	-moz-border-radius-bottomright: 5px ;
+	border-bottom-left-radius: 5px ;
+	border-bottom-right-radius: 5px ;
+	-webkit-box-shadow: rgba(0,0,0,0.8) 3px 3px 4px;
+	-moz-box-shadow: rgba(0,0,0,0.8) 3px 3px 4px;
+	box-shadow: rgba(0,0,0,0.8) 3px 3px 4px;
+}
+#bnote_tools_tray {
+	position:relative;
+	z-index:1;
+	width:100%;
+	height:50px;
+	font-size:10px;
+	background-color:#F3E596;
+	background-image:-webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+			from(#FAF4B9),
+			to(#EBD16A)
+		);
+	border-left: 1px solid #FAF4B9;
+}
+#bnote_tools:hover #bnote_tools_tray {
+	-webkit-box-shadow: rgba(0,0,0,0.8) 3px 3px 10px;
+	-moz-box-shadow: rgba(0,0,0,0.8) 3px 3px 10px;
+	box-shadow: rgba(0,0,0,0.8) 3px 3px 10px;
+}
+#bnote_tools_logo {
+	float:left;
+	display:block;
+	width:40px;
+	height:30px;
+	margin:5px 0;
+	padding:0;
+	text-indent:-3000px;
+	background:url(../img/sprites1.png) no-repeat 0 0;
+	overflow:hidden;
+}
+.bnote_tool_button {
+	float:left;
+	width:40px;
+	padding:5px;
+}
+.bnote_tool_button a {
+	display:block;
+	width:40px;
+	height:27px;
+	margin-bottom:5px;
+	padding:13px 0 0 0;
+	color:#fff;
+	background-color:rgba(0,0,0,0.5);
+	border-radius:20px;
+	font-weight:bold;
+	text-align:center;
+	text-decoration:none;
+	cursor: pointer;
+	-webkit-transition:background-color 300ms;
+}
+.bnote_tool_button a:hover {
+	background-color:rgba(0,0,0,1);
+}
+.bnote_tool_button a.working,
+.bnote_tool_button a.working:hover {
+	background-color:#f00;
+}
+
+
+#bnote_login_container {
+	padding:12px;
+}
+
+.debug {
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:200000;
+	width:3px;
+	height:3px;
+	border:1px solid red;
+	background:#fcc;
+}
